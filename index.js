@@ -4,7 +4,7 @@
 
 var pkg = require('./package.json');
 var extend = require('xtend/mutable');
-var constants = require('./constants');
+var constants = require('gl-constants');
 
 module.exports = NoGL;
 
@@ -21,18 +21,18 @@ var gl = NoGL.prototype;
 extend(gl, constants, {
 	items: {},
 	id: 0,
-	getExtension: function() { return 1 },
-	createBuffer: function() {
+	getExtension: function () { return 0 },
+	createBuffer: function () {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'buffer',
 		};
 		return id;
 	},
-	deleteBuffer: function(){},
-	bindBuffer: function(){},
-	bufferData: function(){},
-	getParameter: function(pname) {
+	deleteBuffer: function (){},
+	bindBuffer: function (){},
+	bufferData: function (){},
+	getParameter: function (pname) {
 		switch(pname) {
 			case gl.MAX_TEXTURE_MAX_ANISOTROPY_EXT: return 16;
 			case gl.MAX_TEXTURE_IMAGE_UNITS_NV: return 16;
@@ -163,10 +163,10 @@ extend(gl, constants, {
 				return 0;
 		}
 	},
-	getSupportedExtensions: function() {
+	getSupportedExtensions: function () {
 		return ["OES_texture_float", "OES_standard_derivatives", "EXT_texture_filter_anisotropic", "MOZ_EXT_texture_filter_anisotropic", "MOZ_WEBGL_lose_context", "MOZ_WEBGL_compressed_texture_s3tc", "MOZ_WEBGL_depth_texture"];
 	},
-	createShader: function(type) {
+	createShader: function (type) {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'shader',
@@ -174,16 +174,16 @@ extend(gl, constants, {
 		};
 		return id;
 	},
-	getShaderParameter: function(shader, pname) {
+	getShaderParameter: function (shader, pname) {
 		switch(pname) {
 			case gl.SHADER_TYPE: return this.items[shader].type;
 			case gl.COMPILE_STATUS: return true;
 			default: throw 'getShaderParameter ' + pname;
 		}
 	},
-	shaderSource: function(){},
-	compileShader: function(){},
-	createProgram: function() {
+	shaderSource: function (){},
+	compileShader: function (){},
+	createProgram: function () {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'program',
@@ -191,12 +191,12 @@ extend(gl, constants, {
 		};
 		return id;
 	},
-	attachShader: function(program, shader) {
+	attachShader: function (program, shader) {
 		this.items[program].shaders.push(shader);
 	},
-	bindAttribLocation: function(){},
-	linkProgram: function(){},
-	getProgramParameter: function(program, pname) {
+	bindAttribLocation: function (){},
+	linkProgram: function (){},
+	getProgramParameter: function (program, pname) {
 		switch(pname) {
 			case gl.LINK_STATUS: return true;
 			case gl.ACTIVE_UNIFORMS: return 4;
@@ -208,58 +208,65 @@ extend(gl, constants, {
 			default: throw 'getProgramParameter ' + pname;
 		}
 	},
-	deleteShader: function(){},
-	deleteProgram: function(){},
-	viewport: function(){},
-	clearColor: function(){},
-	clearDepth: function(){},
-	depthFunc: function(){},
-	enable: function(){},
-	disable: function(){},
-	frontFace: function(){},
-	cullFace: function(){},
-	activeTexture: function(){},
-	createTexture: function() {
+	deleteShader: function (){},
+	deleteProgram: function (){},
+	viewport: function (){},
+	clearColor: function (){},
+	clearDepth: function (){},
+	depthFunc: function (){},
+	enable: function (){},
+	disable: function (){},
+	frontFace: function (){},
+	cullFace: function (){},
+	activeTexture: function (){},
+	createTexture: function () {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'texture',
 		};
 		return id;
 	},
-	deleteTexture: function(){},
+	deleteTexture: function (){},
 	boundTextures: {},
-	bindTexture: function(target, texture) {
+	bindTexture: function (target, texture) {
 		this.boundTextures[target] = texture;
 	},
-	texParameteri: function(){},
-	pixelStorei: function(){},
-	texImage2D: function(){},
-	compressedTexImage2D: function(){},
-	useProgram: function(){},
-	getUniformLocation: function() {
+	texParameteri: function (){},
+	pixelStorei: function (){},
+	texImage2D: function (){},
+	compressedTexImage2D: function (){},
+	useProgram: function (){},
+	getUniformLocation: function () {
 		return null;
 	},
-	getActiveUniform: function(program, index) {
+	getActiveUniform: function (program, index) {
 		return {
 			size: 1,
 			type: gl.INT_VEC3,
 			name: 'activeUniform' + index,
 		};
 	},
-	clear: function(){},
-	uniform4fv: function(){},
-	uniform1i: function(){},
-	getAttribLocation: function() { return 1 },
-	vertexAttribPointer: function(){},
-	enableVertexAttribArray: function(){},
-	disableVertexAttribArray: function(){},
-	drawElements: function(){},
-	drawArrays: function(){},
-	depthMask: function(){},
-	depthRange: function(){},
-	bufferSubData: function(){},
-	blendFunc: function(){},
-	createFramebuffer: function() {
+	getActiveAttrib: function (program, index) {
+		return {
+			size: 1,
+			type: gl.FLOAT,
+			name: 'activeAttrib' + index
+		};
+	},
+	clear: function (){},
+	uniform4fv: function (){},
+	uniform1i: function (){},
+	getAttribLocation: function () { return 1 },
+	vertexAttribPointer: function (){},
+	enableVertexAttribArray: function (){},
+	disableVertexAttribArray: function (){},
+	drawElements: function (){},
+	drawArrays: function (){},
+	depthMask: function (){},
+	depthRange: function (){},
+	bufferSubData: function (){},
+	blendFunc: function (){},
+	createFramebuffer: function () {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'framebuffer',
@@ -267,12 +274,12 @@ extend(gl, constants, {
 		};
 		return id;
 	},
-	bindFramebuffer: function(){},
-	framebufferTexture2D: function(){},
-	checkFramebufferStatus: function() {
+	bindFramebuffer: function (){},
+	framebufferTexture2D: function (){},
+	checkFramebufferStatus: function () {
 		return gl.FRAMEBUFFER_COMPLETE;
 	},
-	createRenderbuffer: function() {
+	createRenderbuffer: function () {
 		var id = this.id++;
 		this.items[id] = {
 			which: 'renderbuffer',
@@ -280,11 +287,11 @@ extend(gl, constants, {
 		};
 		return id;
 	},
-	bindRenderbuffer: function(){},
-	renderbufferStorage: function(){},
-	framebufferRenderbuffer: function(){},
-	scissor: function(){},
-	colorMask: function(){},
-	lineWidth: function(){},
-	vertexAttrib4fv: function(){},
+	bindRenderbuffer: function (){},
+	renderbufferStorage: function (){},
+	framebufferRenderbuffer: function (){},
+	scissor: function (){},
+	colorMask: function (){},
+	lineWidth: function (){},
+	vertexAttrib4fv: function (){},
 });

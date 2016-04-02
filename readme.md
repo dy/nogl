@@ -1,6 +1,6 @@
-WebGL context minimal shim for node.
+WebGL context minimal shim for node. Useful to make [stackgl](https://github.com/stackgl) components not fail in node.
 
-Useful to make [stackgl](https://github.com/stackgl) components not fail in node.
+[![npm install nogl](https://nodei.co/npm/nogl.png?mini=true)](https://npmjs.org/package/nogl/)
 
 ```js
 var Shader = require('gl-shader');
@@ -18,9 +18,6 @@ draw({
 ```
 
 API is compatible with [webgl-context](https://www.npmjs.com/package/webgl-context).
-
 If you need real webgl, use [headless-js](https://github.com/stackgl/headless-gl).
-
 For practical use-case look [nogl-shader-output](https://npmjs.org/package/nogl-shader-output).
-
 Heavily inspired by [emscripten headlessCanvas](https://github.com/kripken/emscripten/blob/master/src/headlessCanvas.js).

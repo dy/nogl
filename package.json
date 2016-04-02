@@ -1,12 +1,15 @@
 {
   "name": "nogl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WebGL shim for node",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
-  "files": ["index.js", "constants.js"],
+  "files": [
+    "index.js",
+    "constants.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dfcreative/nogl.git"

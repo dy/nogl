@@ -18,7 +18,10 @@
     "gpu",
     "gl-shader-output",
     "glsl",
-    "shader"
+    "shader",
+    "stackgl",
+    "webgl",
+    "headless-gl"
   ],
   "author": "Dima Yv <dfcreative@gmail.com>",
   "license": "MIT",
